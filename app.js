@@ -17,6 +17,10 @@ mongoose.connect(process.env.MONGODB_URI, {
     console.error("connection error", err);
 })
 
+app.get('/', (req, res) => {
+    res.render('index');
+});
+
 const studentSchema = new mongoose.Schema({
     name: { type: String, required: true },
     age: { type: Number, required: true },
