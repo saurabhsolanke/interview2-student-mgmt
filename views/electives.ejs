@@ -12,47 +12,52 @@
     <nav class="bg-white border-gray-200 dark:bg-gray-900">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="" class="flex items-center space-x-3 rtl:space-x-reverse">
-                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Electives Management</span>
+                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Electives
+                    Management</span>
             </a>
             <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                <ul
+                    class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                     <li>
-                        <a href="/students" class="block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500">Students List</a>
+                        <a href="/students"
+                            class="block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500">Students
+                            List</a>
+                    </li>
+                    <li>
+                        <a href="" onclick="logout()"
+                            class="block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500">Logout</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
     <div class="flex p-5">
-        <div class="w-1/4 shadow p-5">
+        <div class="w-1/4 shadow rounded-xl shadow-2xl p-5">
             <h2 class="text-lg font-semibold mb-4" id="formTitle">Add Elective</h2>
-            <form id="electiveForm" action="/electives/add" method="POST">
-                <input type="hidden" id="electiveId" name="electiveId" />
+            <form id="electiveForm" action="/electives/add" class="space-y-4">
+                <input type="hidden" id="electiveId" name="id">
                 <div class="mb-4">
-                    <label for="name" class="block text-sm font-medium text-gray-700">Subject Name</label>
-                    <input type="text" id="name" placeholder="Name of Subject" required name="name"
-                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500 p-2" />
+                    <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                    <input type="text" id="name" name="name" required
+                        class="mt-1 p-2 block w-full border rounded-md border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                 </div>
                 <div class="mb-4">
                     <label for="credits" class="block text-sm font-medium text-gray-700">Credits</label>
-                    <input type="number" id="credits" placeholder="Credits" required name="credits"
-                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500 p-2" />
+                    <input type="number" id="credits" name="credits" required
+                        class="mt-1 p-2 block w-full border rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500">
                 </div>
                 <div class="mb-4">
-                    <label for="teacher" class="block text-sm font-medium text-gray-700">Teacher Name</label>
-                    <input type="text" id="teacher" placeholder="Teacher" required name="teacher"
-                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500 p-2" />
+                    <label for="teacher" class="block text-sm font-medium text-gray-700">Teacher</label>
+                    <input type="text" id="teacher" name="teacher" required
+                        class="mt-1 p-2 block w-full border rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500">
                 </div>
-                <div class="flex gap-2">
-                    <button type="submit" id="submitBtn"
-                        class="w-full bg-blue-500 text-white font-bold py-2 rounded hover:bg-blue-600 transition duration-200">
-                        Add Elective
-                    </button>
-                    <button type="button" id="cancelBtn"
-                        class="hidden w-full bg-gray-500 text-white font-bold py-2 rounded hover:bg-gray-600 transition duration-200">
-                        Cancel
-                    </button>
-                </div>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                    Save Elective
+                </button>
+                <button type="button" id="cancelBtn"
+                    class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 hidden">
+                    Cancel
+                </button>
             </form>
         </div>
 
@@ -69,22 +74,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% electives.forEach(elective => { %>
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                <td class="px-6 py-3"><%= elective.name %></td>
-                                <td class="px-6 py-3"><%= elective.credits %></td>
-                                <td class="px-6 py-3"><%= elective.teacher %></td>
+                        <% electives.forEach(elective=> { %>
+                            <tr
+                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
                                 <td class="px-6 py-3">
-                                    <a href="#" onclick="editElective('<%= elective._id %>')" 
-                                        class="text-blue-500 hover:underline">Edit</a>
-                                    <button type="button" 
-                                        onclick="deleteElective('<%= elective._id %>')" 
+                                    <%= elective.name %>
+                                </td>
+                                <td class="px-6 py-3">
+                                    <%= elective.credits %>
+                                </td>
+                                <td class="px-6 py-3">
+                                    <%= elective.teacher %>
+                                </td>
+                                <td class="px-6 py-3">
+                                    <button onclick="editElective('<%= elective.id %>')"
+                                        class="text-blue-500 hover:underline">Edit</button>
+                                    <button type="button" onclick="deleteElective('<%= elective.id %>')"
                                         class="text-red-500 hover:underline ml-2">
                                         Delete
                                     </button>
                                 </td>
                             </tr>
-                        <% }); %>
+                            <% }); %>
                     </tbody>
                 </table>
             </div>
@@ -93,16 +104,51 @@
 </body>
 
 <script>
+    const token = localStorage.getItem('token');
+    if (!token) {
+        window.location.href = '/login';
+    }
+    function getAuthHeaders() {
+        const token = localStorage.getItem('token');
+        return {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        };
+    }
+
     const electiveForm = document.getElementById('electiveForm');
     const formTitle = document.getElementById('formTitle');
     const submitBtn = document.getElementById('submitBtn');
     const cancelBtn = document.getElementById('cancelBtn');
 
+    function logout(event) {
+        event.preventDefault();
+
+        localStorage.removeItem('token');
+        console.log("Logging out...");
+
+        setTimeout(() => {
+            window.location.href = '/login';
+        }, 100);
+    }
+
     function editElective(electiveId) {
-        fetch(`/electives/${electiveId}`)
-            .then(response => response.json())
+        fetch(`/electives/${electiveId}`, {
+            headers: getAuthHeaders()
+        })
+            .then(response => {
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        window.location.href = '/login';
+                        throw new Error('Please Login First');
+                    }
+                    throw new Error(`* Failed to load elective data: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(elective => {
-                document.getElementById('electiveId').value = elective._id;
+                console.log('Fetched Elective:', elective);
+                document.getElementById('electiveId').value = elective.id;
                 document.getElementById('name').value = elective.name;
                 document.getElementById('credits').value = elective.credits;
                 document.getElementById('teacher').value = elective.teacher;
@@ -110,38 +156,35 @@
                 formTitle.textContent = 'Edit Elective';
                 submitBtn.textContent = 'Update Elective';
                 cancelBtn.classList.remove('hidden');
-                electiveForm.action = `/electives/${electiveId}`;
+                // electiveForm.action = `/electives/${electiveId}`;
                 electiveForm.method = 'PUT';
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('Failed to load elective data');
             });
     }
+
+
 
     function deleteElective(electiveId) {
         if (confirm('Are you sure you want to delete this elective?')) {
             fetch(`/electives/delete/${electiveId}`, {
                 method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                }
+                headers: getAuthHeaders()
             })
-            .then(response => {
-                if (response.ok) {
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to delete elective');
+                    }
                     window.location.reload();
-                } else {
-                    throw new Error('Failed to delete elective');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Failed to delete the elective');
-            });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         }
     }
 
-    electiveForm.addEventListener('submit', function(e) {
+    electiveForm.addEventListener('submit', function (e) {
         e.preventDefault();
         const formData = new FormData(this);
         const electiveId = document.getElementById('electiveId').value;
@@ -156,25 +199,25 @@
 
         fetch(url, {
             method: method,
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: getAuthHeaders(),
             body: JSON.stringify(data),
         })
-        .then(response => {
-            if (response.ok) {
+            .then(response => {
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        window.location.href = '/auth/login';
+                        throw new Error('Failed to save elective');
+                    }
+                    throw new Error('Failed to save elective');
+                }
                 window.location.reload();
-            } else {
-                throw new Error('Failed to save elective');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Failed to save elective');
-        });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
     });
 
-    cancelBtn.addEventListener('click', function() {
+    cancelBtn.addEventListener('click', function () {
         electiveForm.reset();
         document.getElementById('electiveId').value = '';
         formTitle.textContent = 'Add Elective';
